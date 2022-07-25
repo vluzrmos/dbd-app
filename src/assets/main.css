@@ -2,6 +2,7 @@
 
 .container {
     width: 100%;
+    padding-inline: .5rem;
     margin-inline: auto;
 }
 
@@ -10,16 +11,12 @@
     flex-direction: row;
     flex-wrap: wrap;
     position: relative;
+    justify-content: center;
 }
 
-.survivor .survivor__profile {
-    display: none;
-    opacity: 0;
-    will-change: transform, opacity;
+.player__profile {
     animation: fadeIn 200ms forwards;
     background-color: rgb(40, 35, 26);
-    overflow: hidden;
-    overflow-y: auto;
 }
 
 @keyframes fadeIn {
@@ -28,26 +25,17 @@
     }
 }
 
-.survivor.show .survivor__profile {
-    display: block;
-    position: fixed;
+.player__profile {
     width: 100%;
     height: 100%;
-    max-height: 90vh;
-    top: 0;
-    left: 0;
-    color: rgb(235, 239, 243);
     padding: 1rem;
-    z-index: 2;
-    box-shadow: 0 0 0 100vw rgba(0, 0, 0, .8);
 }
 
-.survivor {
-    position: relative;
-    cursor: pointer;
+.modal__body .player__profile {
+    border-radius: 5px;
 }
 
-.survivor__name {
+.player__name {
     margin: 0;
     margin-bottom: 1rem;
     padding: 0;
@@ -56,7 +44,7 @@
     color: rgb(242, 162, 12);
 }
 
-.survivor__backstory {
+.player__backstory {
     padding: 0;
     text-align: justify;
     font-size: 1.25rem;
@@ -64,9 +52,15 @@
     font-weight: 600;
     letter-spacing: 1px;
 }
+
+.survivor {
+    position: relative;
+    cursor: pointer;
+    width: calc(100%/4);
+}
+
 .survivor__avatar {
-    width: 200px;
-    height: 277px;
+    width: 100%;
     transition: transform 75ms ease, background-color 200ms ease;
     will-change: transform, background-color;
 }
@@ -82,30 +76,21 @@
         transform: scale(1.05, 1.05)
     }
 }
-
-
-.survivor__profile .survivor__avatar {
-    float: left;
-    margin-right: 0.5rem;
-    margin-bottom: 0;
+.player__profile {
+    flex-direction: column;
+    justify-content: center;
 }
 
-.survivor__perks__list {
+.player__profile .player__avatar {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+}
+
+.player__perks__list {
     display: flex;
     gap: 0.15rem;
     margin-top: 1rem;
-}
-
-.survivor__close {
-    border: none;
-    background-color: transparent;
-    position: absolute;
-    padding: 1rem;
-    top: 0rem;
-    right: 0;
-    cursor: pointer;
-    z-index: 3;
-    color: rgb(242, 162, 12);
 }
 
 .perk {
@@ -124,12 +109,14 @@
         width: 80%;
     }
 
-    .survivor.show .survivor__profile {
-        transform: translate(-50%, -50%);
-        width: 60%;
-        height: auto;
-        min-height: 40%;
-        top: 50%;
-        left: 50%;
+    .survivor {
+        width: calc(100%/6);
+    }
+
+    .player__avatar {
+        float: left;
+        width: 200px;
+        margin-right: .5rem;
+        margin-bottom: .5rem;
     }
 }
