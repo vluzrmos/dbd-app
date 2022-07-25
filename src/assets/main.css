@@ -1,0 +1,135 @@
+@import 'base.css';
+
+.container {
+    width: 100%;
+    margin-inline: auto;
+}
+
+.survivors_list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.survivor .survivor__profile {
+    display: none;
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: fadeIn 200ms forwards;
+    background-color: rgb(40, 35, 26);
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.survivor.show .survivor__profile {
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    max-height: 90vh;
+    top: 0;
+    left: 0;
+    color: rgb(235, 239, 243);
+    padding: 1rem;
+    z-index: 2;
+    box-shadow: 0 0 0 100vw rgba(0, 0, 0, .8);
+}
+
+.survivor {
+    position: relative;
+    cursor: pointer;
+}
+
+.survivor__name {
+    margin: 0;
+    margin-bottom: 1rem;
+    padding: 0;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: rgb(242, 162, 12);
+}
+
+.survivor__backstory {
+    padding: 0;
+    text-align: justify;
+    font-size: 1.25rem;
+    color: rgb(194, 134, 24);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.survivor__avatar {
+    width: 200px;
+    height: 277px;
+    transition: transform 75ms ease, background-color 200ms ease;
+    will-change: transform, background-color;
+}
+
+.survivor>.survivor__avatar:hover {
+    /* transform: scale(1.05, 1.05); */
+
+    animation: scale__avatar 75ms forwards;
+}
+
+@keyframes scale__avatar {
+    to {
+        transform: scale(1.05, 1.05)
+    }
+}
+
+
+.survivor__profile .survivor__avatar {
+    float: left;
+    margin-right: 0.5rem;
+    margin-bottom: 0;
+}
+
+.survivor__perks__list {
+    display: flex;
+    gap: 0.15rem;
+    margin-top: 1rem;
+}
+
+.survivor__close {
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    padding: 1rem;
+    top: 0rem;
+    right: 0;
+    cursor: pointer;
+    z-index: 3;
+    color: rgb(242, 162, 12);
+}
+
+.perk {
+    width: 4rem;
+    height: 4rem;
+    background-color: rgb(89, 25, 109);
+}
+
+.perk__icon {
+    width: 100%;
+    aspect-ratio: 1;
+}
+
+@media (min-width: 600px) {
+    .container {
+        width: 80%;
+    }
+
+    .survivor.show .survivor__profile {
+        transform: translate(-50%, -50%);
+        width: 60%;
+        height: auto;
+        min-height: 40%;
+        top: 50%;
+        left: 50%;
+    }
+}
