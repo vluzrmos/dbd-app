@@ -1,7 +1,8 @@
 <script setup>
-import { usePerksStore } from "@/stores/perks";
-
 import { computed } from "vue";
+import find from "lodash/find";
+import get from "lodash/get";
+import { usePerksStore } from "@/stores/perks";
 
 const perks = usePerksStore();
 
@@ -17,27 +18,17 @@ const props = defineProps({
   },
 });
 
-const perk = computed(() =>
-  perks[props.variant].find(({ id }) => id === props.perkId)
+const perk = computed(() => find(perks[props.variant], { id: props.perkId }));
+const perkDescription = computed(() => get(perk, "value.description", null));
+const perkName = computed(() => get(perk, "value.name"));
+const perkTitle = computed(() => `${perkName.value}\n${perkDescription.value}`);
+const perkIcon = computed(() =>
+  get(perk, "value.icon", get(perk, "value.powerImags.0"))
 );
-
-const perkDescription = computed(() =>
-  perk.value ? perk.value.description : null
-);
-
-const perkIcon = computed(() => {
-  if (!perk.value) {
-    return null;
-  }
-
-  return perk.value.icon || perk.value.powerImgs[0];
-});
-
-const perkName = computed(() => (perk.value ? perk.value.name : null));
 </script>
 
 <template>
-  <div class="perk" :class="['perk--' + variant]" :title="`${perkName}\n${perkDescription}`">
+  <div class="perk" :class="['perk--' + variant]" :title="perkTitle">
     <img class="perk__icon" :src="perkIcon" :alt="perkName" />
   </div>
 </template>
