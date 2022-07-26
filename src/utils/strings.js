@@ -1,4 +1,4 @@
-import * as _strval from "lodash/toString";
+import _strval from "lodash/toString";
 
 export const strval = _strval;
 export const nl2br = (str) =>
@@ -6,4 +6,7 @@ export const nl2br = (str) =>
 
 export const splitLines = (str) => strval(str).split(/(\r\n|\n\r|\r|\n)/);
 
-export const linesToHtmlParagraphs = (str) => splitLines(str).map((text) => `<p>${text}</p>`).join("")
+export const linesToHtmlParagraphs = (str) =>
+  splitLines(str)
+    .map((text) => `<p>${text}</p>`)
+    .join("");
