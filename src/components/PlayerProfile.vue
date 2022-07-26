@@ -1,3 +1,8 @@
+<script setup>
+import PerkIcon from "./PerkIcon.vue";
+defineProps({ player: Object, variant: String });
+</script>
+
 <template>
   <div class="player__profile">
     <img class="player__avatar" loading="lazy" :src="player.imgs.portrait" alt="player picture" />
@@ -11,8 +16,13 @@
   </div>
 </template>
 
-<script setup>
-import PerkIcon from './PerkIcon.vue'
-defineProps({ player: Object, variant: String});
-</script>
+<style scoped>
+.player__perks__list {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+</style>
+
+
 

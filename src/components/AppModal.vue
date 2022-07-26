@@ -1,21 +1,3 @@
-<template>
-  <Teleport to="body">
-    <div ref="modalEl" class="modal" :class="{ 'modal--show': show }">
-      <div class="modal__backdrop" @click="closeModal"></div>
-      <div class="modal__body">
-        <button
-          class="modal__close"
-          type="button"
-          title="Click to close"
-          @click.prevent="$emit('close')"
-          v-html="closeButtonHtml"
-        ></button>
-        <slot v-bind="slotProps" />
-      </div>
-    </div>
-  </Teleport>
-</template>
-
 <script setup>
 import { ref, watchEffect, computed, onMounted } from "vue";
 
@@ -65,6 +47,24 @@ const slotProps = computed(() => ({ show: props.show, showModal, closeModal }));
 
 onMounted(() => {});
 </script>
+
+<template>
+  <Teleport to="body">
+    <div ref="modalEl" class="modal" :class="{ 'modal--show': show }">
+      <div class="modal__backdrop" @click="closeModal"></div>
+      <div class="modal__body">
+        <button
+          class="modal__close"
+          type="button"
+          title="Click to close"
+          @click.prevent="$emit('close')"
+          v-html="closeButtonHtml"
+        ></button>
+        <slot v-bind="slotProps" />
+      </div>
+    </div>
+  </Teleport>
+</template>
 
 <style>
 .modal.modal--show {
