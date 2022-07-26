@@ -1,6 +1,11 @@
 <script setup>
+import { computed } from "vue";
 import PerkIcon from "./PerkIcon.vue";
-defineProps({ player: Object, variant: String });
+import { linesToHtmlParagraphs } from "@/utils/strings.js";
+
+const props = defineProps({ player: Object, variant: String });
+
+const htmlBackstory = computed(() => linesToHtmlParagraphs(props.player.backstory));
 </script>
 
 <template>
@@ -8,7 +13,7 @@ defineProps({ player: Object, variant: String });
     <img class="player__avatar" loading="lazy" :src="player.imgs.portrait" alt="player picture" />
 
     <h1 class="player__name">{{ player.name }}</h1>
-    <p class="player__backstory">{{ player.backstory }}</p>
+    <div class="player__backstory" v-html="htmlBackstory"></div>
 
     <div class="player__perks__list">
       <PerkIcon v-for="perkId in player.perks_ids" v-bind="{ perkId, variant }" :key="perkId" />
@@ -16,11 +21,15 @@ defineProps({ player: Object, variant: String });
   </div>
 </template>
 
-<style scoped>
+<style>
 .player__perks__list {
   display: flex;
   gap: 0.8rem;
   margin-top: 1rem;
+}
+
+.player__backstory p {
+  margin-bottom: 1rem;
 }
 </style>
 

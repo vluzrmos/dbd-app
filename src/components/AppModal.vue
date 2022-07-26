@@ -17,7 +17,6 @@ const modalEl = ref(null);
 const closeButtonHtml = "&Chi;";
 
 const closeOnEsc = (e) => {
-  console.log(e);
   if (
     props.show &&
     e.key === "Escape" &&
