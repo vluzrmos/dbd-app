@@ -25,9 +25,9 @@ const searchNormalized = computed(() => normalize(search.value));
 
 <template>
   <main class="container">
-    <div class="top_search">
-      <input type="search" role="search" placeholder="Type to search..." v-model="search" />
-    </div>
+    <form class="top_search" role="search" aria-label="Sitewide">
+      <input type="search" placeholder="Type to search..." aria-label="Type to search through survivors, killers, perks, and others things" v-model="search" />
+    </form>
     <PlayersList title="Survivors" :players="survivors" variant="survivor" />
     <PlayersList title="Killers" :players="killers" variant="killer" />
   </main>

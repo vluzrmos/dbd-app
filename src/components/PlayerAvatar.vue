@@ -19,8 +19,14 @@ defineProps({
 </template>
 
 <style scoped>
+.player>.player__avatar:hover {
+    /* transform: scale(1.05, 1.05); */
+
+    animation: scale__avatar 75ms forwards;
+}
+
 .player__avatar__name {
-  color: rgb(137, 97, 41);
+  color: rgb(216, 144, 44);
   text-align: center;
 }
 </style>

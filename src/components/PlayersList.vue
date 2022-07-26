@@ -12,7 +12,8 @@ const show = computed(() => player.value !== null);
 <template>
   <div class="players">
     <h1 class="players__title">
-      {{props.title}}
+      <span>{{props.title}}</span>
+      
       <span
         class="players__count"
         :title="`Showing ${players.length} ${variant}s`"
@@ -37,10 +38,12 @@ const show = computed(() => player.value !== null);
 
 <style scoped>
 .players__title {
-  color: rgb(120, 89, 39);
+  color: rgb(242, 162, 12);
+  /* rgb(207 158 9); */
   font-weight: 600;
 }
 .players__count {
+  margin-left: 0.5rem;
   opacity: 0.5;
   font-size: 0.5em;
   vertical-align: super;
