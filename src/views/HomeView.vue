@@ -1,6 +1,6 @@
 <script setup>
-import PlayersList from "../components/PlayersList.vue";
-import { usePlayersStore } from "../stores/players";
+import PlayersList from "@/components/PlayersList.vue";
+import { usePlayersStore } from "@/stores/players";
 import { computed, ref, watch } from "vue";
 import deburr from "lodash/deburr";
 

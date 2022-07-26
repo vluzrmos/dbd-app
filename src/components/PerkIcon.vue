@@ -1,13 +1,13 @@
 <script setup>
-import survivor from "@/data/survivorPerks.json";
-import killer from "@/data/killerPerks.json";
+import { usePerksStore } from "@/stores/perks";
+
 import { computed } from "vue";
 
-const perks = { survivor, killer };
+const perks = usePerksStore();
 
 const props = defineProps({
-  name: {
-    type: String,
+  perkId: {
+    type: Number,
     required: true,
   },
   variant: {
@@ -18,7 +18,7 @@ const props = defineProps({
 });
 
 const perk = computed(() =>
-  perks[props.variant].find(({ name }) => name === props.name)
+  perks[props.variant].find(({ id }) => id === props.perkId)
 );
 
 const perkDescription = computed(() =>

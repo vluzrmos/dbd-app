@@ -11,7 +11,7 @@ defineProps({ player: Object, variant: String });
     <p class="player__backstory">{{ player.backstory }}</p>
 
     <div class="player__perks__list">
-      <PerkIcon v-for="name in player.perks_names" v-bind="{ name, variant }" :key="name" />
+      <PerkIcon v-for="perkId in player.perks_ids" v-bind="{ perkId, variant }" :key="perkId" />
     </div>
   </div>
 </template>
