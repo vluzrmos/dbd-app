@@ -14,15 +14,15 @@ defineProps({
       alt="Player picture"
     />
 
-    <div class="player__avatar__name">{{player.name}}</div>
+    <div class="player__avatar__name">{{ player.name }}</div>
   </div>
 </template>
 
 <style scoped>
-.player>.player__avatar:hover {
-    /* transform: scale(1.05, 1.05); */
+.player > .player__avatar:hover {
+  /* transform: scale(1.05, 1.05); */
 
-    animation: scale__avatar 75ms forwards;
+  animation: scale__avatar 75ms forwards;
 }
 
 .player__avatar__name {

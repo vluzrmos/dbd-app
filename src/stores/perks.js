@@ -6,5 +6,5 @@ export const usePerksStore = defineStore("perks", {
   state: () => ({
     survivor,
     killer,
-  })
+  }),
 });

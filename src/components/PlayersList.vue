@@ -3,36 +3,53 @@ import PlayerAvatar from "./PlayerAvatar.vue";
 import PlayerProfile from "./PlayerProfile.vue";
 import AppModal from "./AppModal.vue";
 import { ref, computed } from "vue";
+import { routeTo } from "../router";
+
 const props = defineProps({ title: String, variant: String, players: Array });
 const player = ref(null);
 
 const show = computed(() => player.value !== null);
+
+const onClick = (item) => {
+  player.value = item;
+
+  // $router.push(
+  //   routeTo('players.show', { params: { playerCode: item.code } })
+  // )
+}
 </script>
 
 <template>
   <div class="players">
     <h1 class="players__title">
-      <span>{{props.title}}</span>
-      
+      <span>{{ props.title }}</span>
+
       <span
         class="players__count"
         :title="`Showing ${players.length} ${variant}s`"
-      >({{ players.length }})</span>
+        >({{ players.length }})</span
+      >
     </h1>
     <div class="players__list">
       <PlayerAvatar
         v-for="item in players"
         :key="item.number"
         :player="item"
-        @click="player = item"
+        @click="onClick(item)"
       />
     </div>
 
-    <div v-if="players.length === 0" class="players__not_found">No players found.</div>
+    <div v-if="players.length === 0" class="players__not_found">
+      No players found.
+    </div>
   </div>
 
   <AppModal :show="show" @close="player = null">
-    <PlayerProfile v-if="player" v-bind="{player}" :variant="variant"></PlayerProfile>
+    <PlayerProfile
+      v-if="player"
+      v-bind="{ player }"
+      :variant="variant"
+    ></PlayerProfile>
   </AppModal>
 </template>
 

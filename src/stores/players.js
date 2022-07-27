@@ -6,5 +6,5 @@ export const usePlayersStore = defineStore("players", {
   state: () => ({
     survivors,
     killers,
-  })
+  }),
 });

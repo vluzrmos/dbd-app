@@ -1,36 +1,30 @@
 <script setup>
-import PlayersList from "@/components/PlayersList.vue";
-import { usePlayersStore } from "@/stores/players";
-import { computed, ref } from "vue";
-import deburr from "lodash/deburr";
-
+import PlayersList from "../components/PlayersList.vue";
+import { usePlayersStore } from "../stores/players.js";
+import { useSearchStore } from "./../stores/search.js";
+import { computed } from "vue";
+import LayoutView from "./LayoutView.vue";
+import { normalize } from "../utils/strings";
 const playersStore = usePlayersStore();
-
-const normalize = (value) => deburr(value).toLowerCase();
+const searchStore = useSearchStore();
 
 const filterPlayer = ({ name, backstory, perks_names }) => {
   return (
     normalize(name + backstory + perks_names.join(",")).indexOf(
-      searchNormalized.value
+      searchStore.searchNormalized
     ) >= 0
   );
 };
 
 const survivors = computed(() => playersStore.survivors.filter(filterPlayer));
 const killers = computed(() => playersStore.killers.filter(filterPlayer));
-
-const search = ref(null);
-const searchNormalized = computed(() => normalize(search.value));
 </script>
 
 <template>
-  <main class="container">
-    <form class="top_search" role="search" aria-label="Sitewide">
-      <input type="search" placeholder="Type to search..." aria-label="Type to search through survivors, killers, perks, and others things" v-model="search" />
-    </form>
+  <LayoutView>
     <PlayersList title="Survivors" :players="survivors" variant="survivor" />
     <PlayersList title="Killers" :players="killers" variant="killer" />
-  </main>
+  </LayoutView>
 </template>
 
 <style scope>
