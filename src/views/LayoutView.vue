@@ -27,6 +27,16 @@ watchEffect(() => {
   searchStore.setSearch(currentRoute.query.search);
 });
 
+const setSearchQueryOnKeyup = () => {
+  if (currentRoute.query.search !== searchStore.search) {
+    router.replace({ query: { search: searchStore.search } });
+  }
+
+  if (searchStore.search === "") {
+    router.replace({ query: { search: undefined } });
+  }
+};
+
 onMounted(() => {
   if (currentRoute.name === "home" && currentRoute.params.focusSearch)
     searchInput.value.focus();
@@ -35,13 +45,15 @@ onMounted(() => {
 
 <template>
   <nav v-if="showSearch" class="container">
-    <form class="top_search" role="search" aria-label="Sitewide">
+    <form class="top_search" role="search" @submit.prevent aria-label="Sitewide">
       <input
         ref="searchInput"
         type="search"
+        name="search"
         placeholder="Type to search..."
         aria-label="Type to search through survivors, killers, perks, and others things"
         v-bind="searchBindings"
+        @keyup="setSearchQueryOnKeyup"
       />
     </form>
   </nav>

@@ -2,9 +2,11 @@ import { defineStore } from "pinia";
 import { strval, normalize } from "../utils/strings";
 
 export const useSearchStore = defineStore("search", {
-  state: () => ({
-    search: null,
-  }),
+  state() {
+    return {
+      search: null,
+    };
+  },
   getters: {
     searchNormalized: (state) => normalize(state.search),
   },
